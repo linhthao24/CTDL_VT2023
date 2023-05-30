@@ -1,0 +1,41 @@
+/*Cho một xâu chỉ gồm các kí tự ‘(‘, ‘)’, ‘[‘, ‘]’, ‘{‘, ‘}’.Một dãy ngoặc đúng được định nghĩa như sau:
+
+-Xâu rỗng là 1 dãy ngoặc đúng.
+
+-Nếu A là 1 dãy ngoặc đúng thì (A),[A], {A} là 1 dãy ngoặc đúng.
+
+-Nếu A và B là 2 dãy ngoặc đúng thì A B là 1 dãy ngoặc đúng.
+
+Cho một xâu S. Nhiệm vụ của bạn là xác định xâu S có là dãy ngoặc đúng hay không*/
+/* 2
+[()]{}{[()()]()}
+[(])
+*/
+// YES  - NO	 
+// dung stack 
+#include<bits/stdc++.h>
+using namespace std;
+main(){
+    int t;
+    cin>>t;
+    while(t--){
+        string str;
+        cin>>str;
+        stack<char> s;
+        bool kt = true;
+        for(int i = 0; i < str.length(); i++){
+            if(str[i] == '{' || str[i] == '[' || str[i] == '(') s.push(str[i]);
+            else{
+                if(s.empty()){
+                    kt = false;
+                    break;
+                }else{
+                    if((s.top() == '{' && str[i] == '}' ) || (s.top() == '[' && str[i] == ']') || (s.top() == '(' && str[i] == ')' ) ) 
+                        s.pop();
+                }
+            }
+        }
+        if(!s.empty() ) cout<<"NO\n";
+        else cout<<"YES\n";
+    }
+}
